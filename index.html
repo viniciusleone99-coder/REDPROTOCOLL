@@ -182,14 +182,21 @@ body{
 
 #reveal{
   display:block;
+  position:relative;
+  z-index:5;
   width:100%;
   max-width:400px;
   margin-top:22px;
 }
 
-/* Botão principal: verde fluorescente, brilho neon e pulsação contínua. */
+/* Botão principal: link nativo clicável, com brilho neon animado.
+   Anima apenas a luz, não o tamanho/posição do link. */
 #reveal .accept-button{
   display:block;
+  position:relative;
+  z-index:2;
+  pointer-events:auto;
+  touch-action:manipulation;
   width:100%;
   max-width:100%;
   min-height:60px;
@@ -200,9 +207,7 @@ body{
   text-shadow:0 1px 0 rgba(255,255,255,.24);
   box-shadow:0 0 12px rgba(39,255,111,.90),0 0 27px rgba(39,255,111,.58),
              0 8px 26px rgba(5,121,50,.5),inset 0 1px 1px rgba(255,255,255,.5);
-  animation:offerNeonPulse 1.35s ease-in-out infinite !important;
-  transform-origin:center;
-  will-change:transform,box-shadow;
+  animation:offerNeonPulse 1.35s ease-in-out infinite;
   transition:filter .15s ease;
 }
 
@@ -211,14 +216,12 @@ body{
 
 @keyframes offerNeonPulse{
   0%,100%{
-    transform:scale(1);
-    box-shadow:0 0 12px rgba(39,255,111,.85),0 0 26px rgba(39,255,111,.54),
+    box-shadow:0 0 10px rgba(39,255,111,.70),0 0 22px rgba(39,255,111,.45),
                0 7px 24px rgba(5,121,50,.48),inset 0 1px 1px rgba(255,255,255,.5);
   }
   50%{
-    transform:scale(1.065);
-    box-shadow:0 0 22px rgba(76,255,132,1),0 0 48px rgba(34,255,105,.88),
-               0 0 76px rgba(33,255,99,.48),0 10px 30px rgba(5,121,50,.60),
+    box-shadow:0 0 22px rgba(76,255,132,1),0 0 48px rgba(34,255,105,.92),
+               0 0 74px rgba(33,255,99,.60),0 10px 30px rgba(5,121,50,.60),
                inset 0 1px 2px rgba(255,255,255,.7);
   }
 }
@@ -284,7 +287,7 @@ body{
 <!-- ===== BOTÕES KASHPAY ===== -->
 <div id="reveal">
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <a class="accept-button" href="https://checkout.kashpay.com/checkout/checkout-1794009029305" style="font-family: 'Poppins'; font-size: 25px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #057932; border: none; border-radius: 50px; padding: 13px 7%; cursor: pointer; text-align: center; text-decoration: none; display: block; margin: auto;">Approfitterò dell'offerta!</a>
+    <a class="accept-button" href="https://checkout.kashpay.com/checkout/checkout-1794009029305" target="_blank" rel="noopener noreferrer" style="font-family: 'Poppins'; font-size: 25px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #057932; border: none; border-radius: 50px; padding: 13px 7%; cursor: pointer; text-align: center; text-decoration: none; display: block; margin: auto;">Approfitterò dell'offerta!</a>
     <button
       class="decline-button"
       type="button"
