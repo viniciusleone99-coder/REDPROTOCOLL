@@ -181,7 +181,7 @@ body{
 }
 
 #reveal{
-  display:block;
+  display:none;
   position:relative;
   z-index:5;
   width:100%;
@@ -244,6 +244,7 @@ body{
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
 }
+
 </style>
 
 <script src="https://checkout.kashpay.com/scripts/upsell-processor.js"></script>
@@ -284,10 +285,11 @@ body{
   </script>
 </div>
 
+
 <!-- ===== BOTÕES KASHPAY ===== -->
 <div id="reveal">
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <button class="accept-button" type="button" style="font-family: 'Poppins'; font-size: 25px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #057932; border: none; border-radius: 50px; padding: 13px 7%; cursor: pointer; text-align: center; text-decoration: none; display: block; margin: auto;">Approfitterò dell'offerta!</button>
+    <button class="accept-button" type="button" onclick="acceptUpsell('https://checkout.kashpay.com/u/96d1f386910163c5')" style="font-family: 'Poppins'; font-size: 25px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #057932; border: none; border-radius: 50px; padding: 13px 7%; cursor: pointer; text-align: center; display: block; margin: auto;">Approfitterò dell'offerta!</button>
     <button
       class="decline-button"
       type="button"
@@ -298,307 +300,17 @@ body{
 </div>
 
 
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d0d0d">
-<title>RedProtocoll</title>
 
-<!-- ===== PRELOAD VTURB ===== -->
+<!-- ===== ONE CLICK KASHPAY: VISIBILE DOPO 60 SECONDI DI VIDEO ===== -->
 <script>
-!function(i,n){
-  i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())
-}(window,performance);
+(function () {
+  const player = document.getElementById('vid-6abb109077ab3553dc57134a');
+  if (!player) return;
+  player.addEventListener('player:ready', function () {
+    player.displayHiddenElements(60, ['#reveal']);
+  });
+})();
 </script>
-
-<link rel="preload" href="https://scripts.converteai.net/20a070d6-dd0d-4397-aab3-ecc0fb3a86c2/players/6abb109077ab3553dc57134a/v4/player.js" as="script">
-<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-
-<link rel="dns-prefetch" href="https://cdn.converteai.net">
-<link rel="dns-prefetch" href="https://scripts.converteai.net">
-<link rel="dns-prefetch" href="https://images.converteai.net">
-<link rel="dns-prefetch" href="https://license.vturb.com">
-
-<!-- ===== SCRIPT KASHPAY ===== -->
-
-<style>
-:root{
-  --gold:#c9a84c;
-  --gold-soft:#e3c977;
-  --gold-dim:rgba(201,168,76,.22);
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:
-    radial-gradient(ellipse 70% 40% at 50% -6%, rgba(201,168,76,.13), transparent 62%),
-    radial-gradient(ellipse 90% 50% at 50% 108%, rgba(201,168,76,.06), transparent 60%),
-    #0d0d0d;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:24px 16px;
-  font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-}
-
-.hook{
-  text-align:center;
-  margin-bottom:20px;
-  max-width:400px;
-}
-
-.pill{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:6px 13px;
-  border-radius:999px;
-  border:1px solid rgba(201,168,76,.3);
-  background:rgba(201,168,76,.07);
-  color:var(--gold);
-  font-size:.64rem;
-  font-weight:700;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-
-.pill i{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#27b163;
-  box-shadow:0 0 0 0 rgba(39,177,99,.6);
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(39,177,99,.55)}
-  70%{box-shadow:0 0 0 7px rgba(39,177,99,0)}
-  100%{box-shadow:0 0 0 0 rgba(39,177,99,0)}
-}
-
-.hook-line{
-  margin:13px 0 0;
-  font-family:Georgia,'Times New Roman',serif;
-  font-weight:700;
-  font-size:clamp(1.3rem,5.4vw,1.7rem);
-  line-height:1.2;
-  color:#fff;
-}
-
-.hook-sub{
-  margin:8px 0 0;
-  color:var(--gold-soft);
-  font-size:.8rem;
-  line-height:1.5;
-  opacity:.82;
-}
-
-.warning{
-  width:100%;
-  max-width:400px;
-  margin:0 0 14px;
-  text-align:center;
-  color:#fff;
-  font-size:.95rem;
-  font-weight:700;
-  line-height:1.4;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:20px;
-}
-
-.brand::before,
-.brand::after{
-  content:"";
-  width:34px;
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold-dim));
-}
-
-.brand::after{
-  background:linear-gradient(90deg,var(--gold-dim),transparent);
-}
-
-.brand span{
-  font-family:Georgia,'Times New Roman',serif;
-  font-weight:700;
-  font-size:.82rem;
-  letter-spacing:.28em;
-  color:var(--gold-soft);
-  text-transform:uppercase;
-}
-
-.player-wrap{
-  position:relative;
-  width:100%;
-  max-width:400px;
-  padding:7px;
-  border-radius:16px;
-  border:1px solid var(--gold-dim);
-  background:linear-gradient(165deg,rgba(201,168,76,.09),rgba(201,168,76,.02) 45%,transparent);
-}
-
-.player-wrap::before,
-.player-wrap::after{
-  content:"";
-  position:absolute;
-  width:16px;
-  height:16px;
-  border:1px solid rgba(201,168,76,.55);
-}
-
-.player-wrap::before{
-  top:-1px;
-  left:-1px;
-  border-right:0;
-  border-bottom:0;
-  border-radius:16px 0 0 0;
-}
-
-.player-wrap::after{
-  bottom:-1px;
-  right:-1px;
-  border-left:0;
-  border-top:0;
-  border-radius:0 0 16px 0;
-}
-
-.player-wrap vturb-smartplayer{
-  border-radius:11px;
-  overflow:hidden;
-  display:block;
-}
-
-#reveal{
-  display:block;
-  position:relative;
-  z-index:5;
-  width:100%;
-  max-width:400px;
-  margin-top:22px;
-}
-
-/* Botão principal: link nativo clicável, com brilho neon animado.
-   Anima apenas a luz, não o tamanho/posição do link. */
-#reveal .accept-button{
-  display:block;
-  position:relative;
-  z-index:2;
-  pointer-events:auto;
-  touch-action:manipulation;
-  width:100%;
-  max-width:100%;
-  min-height:60px;
-  border:2px solid #a8ffc3 !important;
-  background:linear-gradient(125deg,#64ff96 0%,#13ed58 50%,#51ff82 100%) !important;
-  color:#073019 !important;
-  font-weight:700 !important;
-  text-shadow:0 1px 0 rgba(255,255,255,.24);
-  box-shadow:0 0 12px rgba(39,255,111,.90),0 0 27px rgba(39,255,111,.58),
-             0 8px 26px rgba(5,121,50,.5),inset 0 1px 1px rgba(255,255,255,.5);
-  animation:offerNeonPulse 1.35s ease-in-out infinite;
-  transition:filter .15s ease;
-}
-
-#reveal .accept-button:hover{filter:brightness(1.06)}
-#reveal .accept-button:active{filter:brightness(.93)}
-
-@keyframes offerNeonPulse{
-  0%,100%{
-    box-shadow:0 0 10px rgba(39,255,111,.70),0 0 22px rgba(39,255,111,.45),
-               0 7px 24px rgba(5,121,50,.48),inset 0 1px 1px rgba(255,255,255,.5);
-  }
-  50%{
-    box-shadow:0 0 22px rgba(76,255,132,1),0 0 48px rgba(34,255,105,.92),
-               0 0 74px rgba(33,255,99,.60),0 10px 30px rgba(5,121,50,.60),
-               inset 0 1px 2px rgba(255,255,255,.7);
-  }
-}
-
-/* Recusa: opção secundária, menor e sem a cor de alerta. */
-#reveal .decline-button{
-  width:auto;
-  max-width:95%;
-  min-height:36px;
-  margin:0 auto;
-  box-shadow:none;
-  opacity:.78;
-  text-decoration:underline;
-  text-underline-offset:3px;
-  transition:opacity .15s ease;
-}
-
-#reveal .decline-button:hover{opacity:1}
-
-@media(prefers-reduced-motion:reduce){
-  *{scroll-behavior:auto!important}
-}
-</style>
-
-<script src="https://checkout.kashpay.com/scripts/upsell-processor.js"></script>
-</head>
-
-<body>
-
-<div class="hook">
-  <span class="pill"><i></i>Ordine confermato</span>
-  <p class="hook-line">Non chiudere questa pagina.</p>
-</div>
-
-<div class="warning">
-  Attenzione!!! Guarda il video completo per evitare l'annullamento dell'acquisto.
-</div>
-
-<div class="brand">
-  <span>RedProtocoll</span>
-</div>
-
-<!-- ===== VSL ===== -->
-<div class="player-wrap">
-  <vturb-smartplayer
-    id="vid-6abb109077ab3553dc57134a"
-    style="display:block;margin:0 auto;width:100%;max-width:400px;"
-  >
-    <div
-      class="vturb-player-placeholder"
-      style="position:relative;width:100%;padding:177.77777777777777% 0 0;z-index:0;background-color:black;"
-    ></div>
-  </vturb-smartplayer>
-
-  <script type="text/javascript">
-    var s=document.createElement("script");
-    s.src="https://scripts.converteai.net/20a070d6-dd0d-4397-aab3-ecc0fb3a86c2/players/6abb109077ab3553dc57134a/v4/player.js";
-    s.async=!0;
-    document.head.appendChild(s);
-  </script>
-</div>
-
-<!-- ===== BOTÕES KASHPAY ===== -->
-<div id="reveal">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <button class="accept-button" type="button" style="font-family: 'Poppins'; font-size: 25px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #057932; border: none; border-radius: 50px; padding: 13px 7%; cursor: pointer; text-align: center; text-decoration: none; display: block; margin: auto;">Approfitterò dell'offerta!</button>
-    <button
-      class="decline-button"
-      type="button"
-      onclick="declineUpsell('https://checkout.kashpay.com.br/u/00c7c2ce148932f3')"
-      style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.4;color:#b7b7b7;background:transparent;border:none;border-radius:12px;padding:9px 12px;cursor:pointer;text-align:center;display:block;"
-    >Per il momento non ne ho bisogno.</button>
-  </div>
-</div>
-
 
 </body>
 </html>
